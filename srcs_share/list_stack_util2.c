@@ -12,32 +12,38 @@
 
 #include "../includes/share.h"
 
-void			ft_list_r(t_stack *stack)
+void			ft_list_r(t_stack *stack, t_bool is_print)
 {
 	t_list		*temp;
 	t_list		*temp2;
 
+	if (is_print == TRUE)
+		ft_putorder("r", stack);
 	if (stack->size <= 1)
 		return ;
 	temp = *(stack->head);
 	temp2 = temp->back;
 	temp->back = NULL;
+	stack->size--;
 	temp->front = *(stack->tail);
 	(*(stack->tail))->back = temp;
 	*(stack->head) = temp2;
 	ft_list_pb(stack, temp);
 }
 
-void			ft_list_rr(t_stack *stack)
+void			ft_list_rr(t_stack *stack, t_bool is_print)
 {
 	t_list		*temp;
 	t_list		*temp2;
 
+	if (is_print == TRUE)
+		ft_putorder("rr", stack);
 	if (stack->size <= 1)
 		return ;
 	temp = *(stack->tail);
 	temp2 = temp->front;
 	temp2->back = NULL;
+	stack->size--;
 	temp->front = NULL;
 	*(stack->tail) = temp2;
 	ft_list_pf(stack, temp);
@@ -82,6 +88,10 @@ t_stack			*ft_make_stack(char id)
 	*(ret->tail) = NULL;
 	ret->min = INT_MAX;
 	ret->max = INT_MIN;
+	ret->is_first = TRUE;
+	ret->upper_cnt = 0;
+	ret->sep_num = 0;
+	ret->size = 0;
 	ret->min_r = 0;
 	ret->min_rr = 0;
 	ret->max_r = 0;

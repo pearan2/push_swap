@@ -33,3 +33,11 @@ int					ft_putstr(const char *str)
 	write(1, str, ft_strlen(str));
 	return (0);
 }
+
+int					ft_putorder(const char *str, t_stack *stack)
+{
+	write(1, str, ft_strlen(str));
+	write(1, &(stack->id), 1);
+	write(1, "\n", 1);
+	return (0);
+}

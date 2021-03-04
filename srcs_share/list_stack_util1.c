@@ -70,11 +70,13 @@ void			ft_list_pb(t_stack *stack, t_list *new)
 	}
 }
 
-void			ft_list_move(t_stack *a, t_stack *b)
+void			ft_list_move(t_stack *a, t_stack *b, t_bool is_print)
 {
 	t_list		*temp;
 	t_list		*temp2;
 
+	if (is_print == TRUE)
+		ft_putorder("p", b);
 	if (a->size == 0 || a->head == NULL || *(a->head) == NULL)
 		return ;
 	if (a->size == 1)

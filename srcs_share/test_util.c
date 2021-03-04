@@ -15,7 +15,6 @@ void			printf_front_to_back(t_list *temp)
 		printf("%d ",temp->value);
 		temp = temp->back;
 	}
-	printf("\n");
 }
 
 void			printf_stack(t_stack *stack)
@@ -23,7 +22,8 @@ void			printf_stack(t_stack *stack)
 	printf("%c >> ", stack->id);
 	if (stack->size > 0)
 	{
-		printf_back_to_front(*(stack->tail));
-		//printf_front_to_back(*(stack->head));
+		//printf_back_to_front(*(stack->tail));
+		printf_front_to_back(*(stack->head));
 	}
+	printf("\n");
 }

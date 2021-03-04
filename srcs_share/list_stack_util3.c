@@ -12,11 +12,13 @@
 
 #include "../includes/share.h"
 
-void			ft_list_s(t_stack *stack)
+void			ft_list_s(t_stack *stack, t_bool is_print)
 {
 	t_list		*temp;
 	t_list		*temp2;
 
+	if (is_print == TRUE)
+		ft_putorder("s", stack);
 	if (stack->size <= 1)
 		return ;
 	if (stack->size == 2)
@@ -34,22 +36,28 @@ void			ft_list_s(t_stack *stack)
 		ft_list_s_3(stack);
 }
 
-void			ft_list_s_all(t_stack *a, t_stack *b)
+void			ft_list_s_all(t_stack *a, t_stack *b, t_bool is_print)
 {
-	ft_list_s(a);
-	ft_list_s(b);
+	if (is_print == TRUE)
+		ft_putstr("ss\n");
+	ft_list_s(a, FALSE);
+	ft_list_s(b, FALSE);
 }
 
-void			ft_list_r_all(t_stack *a, t_stack *b)
+void			ft_list_r_all(t_stack *a, t_stack *b, t_bool is_print)
 {
-	ft_list_r(a);
-	ft_list_r(b);
+	if (is_print == TRUE)
+		ft_putstr("rr\n");
+	ft_list_r(a, FALSE);
+	ft_list_r(b, FALSE);
 }
 
-void			ft_list_rr_all(t_stack *a, t_stack *b)
+void			ft_list_rr_all(t_stack *a, t_stack *b, t_bool is_print)
 {
-	ft_list_rr(a);
-	ft_list_rr(b);
+	if (is_print == TRUE)
+		ft_putstr("rrr\n");
+	ft_list_rr(a, FALSE);
+	ft_list_rr(b, FALSE);
 }
 
 t_bool			ft_list_is_sorted(t_stack *stack)

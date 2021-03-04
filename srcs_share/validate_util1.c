@@ -53,6 +53,7 @@ long long		to_long_long(const char *str)
 
 	idx = 0;
 	ret = 0;
+	is_minus = FALSE;
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')

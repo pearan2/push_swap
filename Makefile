@@ -32,6 +32,16 @@ CHECKER_SRCS	=	${addprefix ${CHECKER_DIR}, ${CHECKER_SRCNAME}}
 CHECKER_NAME	=	checker
 CHECKER_OBJS	=	${CHECKER_SRCS:.c=.o}
 
+PUSH_SWAP_DIR = 	./srcs_push_swap/
+PUSH_SWAP_SRCNAME	=	\
+						main.c\
+						solve_util1.c\
+						solve_util2.c\
+
+PUSH_SWAP_SRCS		=	${addprefix ${PUSH_SWAP_DIR}, ${PUSH_SWAP_SRCNAME}}
+PUSH_SWAP_NAME		=	push_swap
+PUSH_SWAP_OBJS		=	${PUSH_SWAP_SRCS:.c=.o}
+
 INCDIR		=		./includes/
 CC			=		gcc
 #CF			=		-Wall -Wextra -Werror
@@ -43,13 +53,21 @@ CF			=		-g
 ${CHECKER_NAME}		:	${CHECKER_OBJS} ${SHARE_OBJS}
 					${CC} ${CF} ${CHECKER_OBJS} ${SHARE_OBJS} -o ${CHECKER_NAME}
 
-fclean		:		cclean
+${PUSH_SWAP_NAME}	:	${PUSH_SWAP_OBJS} ${SHARE_OBJS}
+					${CC} ${CF} ${PUSH_SWAP_OBJS} ${SHARE_OBJS} -o ${PUSH_SWAP_NAME}
+
+fclean		:		cclean psclean
 					rm -f ${CHECKER_NAME}
+					rm -f ${PUSH_SWAP_NAME}
 
 cclean		:		
 					rm -f ${CHECKER_OBJS}
 					rm -f ${SHARE_OBJS}
 
-all			:		${CHECKER_NAME}
+psclean		:
+					rm -f ${PUSH_SWAP_OBJS}
+					rm -f ${SHARE_OBJS}
+
+all			:		${CHECKER_NAME} ${PUSH_SWAP_NAME}
 
 re			:		fclean all
