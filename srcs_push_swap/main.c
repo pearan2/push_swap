@@ -13,7 +13,7 @@
 #include "../includes/share.h"
 #include "../includes/push_swap.h"
 
-int					solve(t_stack *a, t_stack *b, size_t cs, int *arr)
+static int			solve(t_stack *a, t_stack *b, size_t cs, int *arr)
 {
 	size_t			idx;
 	int				bb;
@@ -41,14 +41,17 @@ int					solve(t_stack *a, t_stack *b, size_t cs, int *arr)
 		a->min = a->max + 1;
 		before_sort_num = after_sort_num;
 	}
+	return (0);
 }
 
-int					do_solve(t_stack *a, t_stack *b)
+static int			do_solve(t_stack *a, t_stack *b)
 {
 	size_t			idx;
-	int				arr[a->size];
+	int				*arr;
 	t_list			*temp;
 
+	if (!(arr = malloc(sizeof(int) * a->size)))
+		return (ft_puterror_and_free2(a, b, ERR_MSG, 2));
 	idx = 0;
 	temp = *(a->head);
 	while (idx < a->size)
@@ -58,12 +61,18 @@ int					do_solve(t_stack *a, t_stack *b)
 		temp = temp->back;
 	}
 	ft_sort_int_arr(arr, a->size);
-	if (a->size <= 100)
-		return (solve(a, b, (a->size / 3) + 1, arr));
-	else if (a->size > 100 && a->size <= 500)
-		return (solve(a, b, (a->size / 5) + 1, arr));
+	if (a->size <= 1)
+		return (0);
+	else if (a->size <= 3)
+		return (solve_2_3(a, b));
+	else if (a->size <= 6)
+		return (solve_4_6(a, b));
+	else if (a->size <= 100)
+		return (solve(a, b, (a->size / 2) + 1, arr));
+	else if (a->size <= 500)
+		return (solve(a, b, (a->size / 4) + 1, arr));
 	else
-		return (solve(a, b, (a->size / 9) + 1, arr));
+		return (solve(a, b, (a->size / 8) + 1, arr));
 }
 
 int					main(int ac, char **av)

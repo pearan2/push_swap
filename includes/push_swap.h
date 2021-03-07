@@ -22,5 +22,6 @@ void				ft_order_min_r(t_stack *a, t_stack *b, size_t min_r);
 void				ft_order_min_rr(t_stack *a, t_stack *b, size_t min_rr);
 void				ft_order_max_r(t_stack *a, t_stack *b, size_t max_r);
 void				ft_order_max_rr(t_stack *a, t_stack *b, size_t max_rr);
+int				    ft_get_next_pb(t_stack *a);
 
 #endif

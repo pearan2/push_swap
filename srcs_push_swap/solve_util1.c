@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   solve_util1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -39,19 +39,31 @@ void			ft_under_value_pb(t_stack *a, t_stack *b, int bb)
 {
 	size_t			idx;
 	size_t			cnt;
+	size_t			next_step;
 
 	cnt = 0;
 	while (cnt < a->sep_num)
 	{
-		//printf_stack(a);
-		//printf_stack(b);
-		if ((*(a->head))->value <= a->max && (*(a->head))->value >= a->min)
+		idx = 0;
+		next_step = ft_get_next_pb(a);
+		if (next_step == a->min_r)
 		{
-			ft_list_move(a, b, TRUE);
-			cnt++;
-			continue;
+			while (idx < next_step)
+			{
+				ft_list_r(a, TRUE);
+				idx++;
+			}
 		}
-		ft_list_r(a, TRUE);
+		else
+		{
+			while (idx < next_step)
+			{
+				ft_list_rr(a, TRUE);
+				idx++;
+			}
+		}
+		cnt++;
+		ft_list_move(a, b, TRUE);
 	}
 	if (a->is_first == FALSE)
 	{
@@ -59,7 +71,6 @@ void			ft_under_value_pb(t_stack *a, t_stack *b, int bb)
 			ft_list_rr(a, TRUE);
 	}
 	a->is_first = FALSE;
-
 }
 
 void			ft_calc_min_max(t_stack *b)
