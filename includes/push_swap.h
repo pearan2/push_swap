@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: honlee <honlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:39:34 by honlee            #+#    #+#             */
-/*   Updated: 2021/03/04 13:55:59 by honlee           ###   ########.fr       */
+/*   Updated: 2021/03/09 00:27:42 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void				ft_order_min_r(t_stack *a, t_stack *b, size_t min_r);
 void				ft_order_min_rr(t_stack *a, t_stack *b, size_t min_rr);
 void				ft_order_max_r(t_stack *a, t_stack *b, size_t max_r);
 void				ft_order_max_rr(t_stack *a, t_stack *b, size_t max_rr);
-int				    ft_get_next_pb(t_stack *a);
+int					ft_get_next_pb(t_stack *a);
+int					solve_2_3(t_stack *a);
+size_t				ft_set_max_min(t_stack *a);
+int					solve_4_5(t_stack *a, t_stack *b);
 
 #endif

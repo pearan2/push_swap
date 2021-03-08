@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_util1.c                                       :+:      :+:    :+:   */
+/*   list_stack_util1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: honlee <honlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:39:34 by honlee            #+#    #+#             */
-/*   Updated: 2021/03/04 13:55:59 by honlee           ###   ########.fr       */
+/*   Updated: 2021/03/09 00:12:56 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,14 @@ void			ft_list_move(t_stack *a, t_stack *b, t_bool is_print)
 		temp->front = NULL;
 		*(a->head) = NULL;
 		a->size = 0;
+		return ;
 	}
-	else
-	{
-		temp = *(a->head);
-		temp2 = temp->back;
-		temp2->front = NULL;
-		temp->back = NULL;
-		temp->front = NULL;
-		ft_list_pf(b, temp);
-		*(a->head) = temp2;
-		a->size--;
-	}
+	temp = *(a->head);
+	temp2 = temp->back;
+	temp2->front = NULL;
+	temp->back = NULL;
+	temp->front = NULL;
+	ft_list_pf(b, temp);
+	*(a->head) = temp2;
+	a->size--;
 }

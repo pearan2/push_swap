@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solve_util1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: honlee <honlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:39:34 by honlee            #+#    #+#             */
-/*   Updated: 2021/03/04 13:55:59 by honlee           ###   ########.fr       */
+/*   Updated: 2021/03/09 00:25:17 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,34 +42,25 @@ void			ft_under_value_pb(t_stack *a, t_stack *b, int bb)
 	size_t			next_step;
 
 	cnt = 0;
-	while (cnt < a->sep_num)
+	while (cnt++ < a->sep_num)
 	{
 		idx = 0;
 		next_step = ft_get_next_pb(a);
 		if (next_step == a->min_r)
 		{
-			while (idx < next_step)
-			{
+			while (idx++ < next_step)
 				ft_list_r(a, TRUE);
-				idx++;
-			}
 		}
 		else
 		{
-			while (idx < next_step)
-			{
+			while (idx++ < next_step)
 				ft_list_rr(a, TRUE);
-				idx++;
-			}
 		}
-		cnt++;
 		ft_list_move(a, b, TRUE);
 	}
 	if (a->is_first == FALSE)
-	{
 		while ((*(a->tail))->value != bb)
 			ft_list_rr(a, TRUE);
-	}
 	a->is_first = FALSE;
 }
 
@@ -120,13 +111,10 @@ size_t			ft_get_min(t_stack *b)
 void			ft_rollback_pa(t_stack *a, t_stack *b)
 {
 	size_t		next_step;
-	size_t		idx;
 
 	b->upper_cnt = 0;
 	while (b->size != 0)
 	{
-		//printf_stack(a);
-		//printf_stack(b);
 		ft_calc_min_max(b);
 		next_step = ft_get_min(b);
 		if (next_step == b->min_r)

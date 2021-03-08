@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: honlee <honlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:39:34 by honlee            #+#    #+#             */
-/*   Updated: 2021/03/04 13:55:59 by honlee           ###   ########.fr       */
+/*   Updated: 2021/03/09 01:55:43 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,22 @@ static int			solve(t_stack *a, t_stack *b, size_t cs, int *arr)
 		ft_under_value_pb(a, b, (*(a->tail))->value);
 		ft_rollback_pa(a, b);
 		idx = 0;
-		while (idx < b->upper_cnt)
-		{
+		while (idx++ < b->upper_cnt)
 			ft_list_r(a, TRUE);
-			idx++;
-		}
 		a->min = a->max + 1;
 		before_sort_num = after_sort_num;
 	}
 	return (0);
 }
 
-static int			do_solve(t_stack *a, t_stack *b)
+static int			*set_arr(t_stack *a)
 {
-	size_t			idx;
 	int				*arr;
 	t_list			*temp;
+	size_t			idx;
 
 	if (!(arr = malloc(sizeof(int) * a->size)))
-		return (ft_puterror_and_free2(a, b, ERR_MSG, 2));
+		return (NULL);
 	idx = 0;
 	temp = *(a->head);
 	while (idx < a->size)
@@ -60,19 +57,39 @@ static int			do_solve(t_stack *a, t_stack *b)
 		idx++;
 		temp = temp->back;
 	}
+	return (arr);
+}
+
+static int			free_all(t_stack *a, t_stack *b, int *arr)
+{
+	free(arr);
+	ft_free_stack(a, 2);
+	ft_free_stack(b, 2);
+	return (0);
+}
+
+static int			do_solve(t_stack *a, t_stack *b)
+{
+	int				*arr;
+
+	if (!(arr = set_arr(a)))
+		return (ft_puterror_and_free2(a, b, ERR_MSG, 2));
 	ft_sort_int_arr(arr, a->size);
+	if (ft_list_is_sorted(a) == TRUE)
+		return (free_all(a, b, arr));
 	if (a->size <= 1)
-		return (0);
+		;
 	else if (a->size <= 3)
-		return (solve_2_3(a, b));
-	else if (a->size <= 6)
-		return (solve_4_6(a, b));
+		solve_2_3(a);
+	else if (a->size <= 5)
+		solve_4_5(a, b);
 	else if (a->size <= 100)
-		return (solve(a, b, (a->size / 2) + 1, arr));
+		solve(a, b, (a->size / 3) + 1, arr);
 	else if (a->size <= 500)
-		return (solve(a, b, (a->size / 4) + 1, arr));
+		solve(a, b, (a->size / 6) + 1, arr);
 	else
-		return (solve(a, b, (a->size / 8) + 1, arr));
+		solve(a, b, (a->size / 9) + 1, arr);
+	return (free_all(a, b, arr));
 }
 
 int					main(int ac, char **av)

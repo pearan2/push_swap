@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: honlee <honlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/04 21:49:15 by honlee            #+#    #+#              #
-#    Updated: 2021/03/05 01:16:23 by honlee           ###   ########seoul.kr   #
+#    Updated: 2021/03/09 00:24:58 by honlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ SHARE_SRCNAME = 	\
 					list_stack_util3.c\
 					list_stack_util4.c\
 					string_util1.c\
-					test_util.c\
 					validate_util1.c
 
 SHARE_SRCS		=	${addprefix ${SHARE_DIR}, ${SHARE_SRCNAME}}
@@ -37,6 +36,7 @@ PUSH_SWAP_SRCNAME	=	\
 						main.c\
 						solve_util1.c\
 						solve_util2.c\
+						solve_util3.c\
 
 PUSH_SWAP_SRCS		=	${addprefix ${PUSH_SWAP_DIR}, ${PUSH_SWAP_SRCNAME}}
 PUSH_SWAP_NAME		=	push_swap
@@ -44,8 +44,7 @@ PUSH_SWAP_OBJS		=	${PUSH_SWAP_SRCS:.c=.o}
 
 INCDIR		=		./includes/
 CC			=		gcc
-#CF			=		-Wall -Wextra -Werror
-CF			=		-g
+CF			=		-Wall -Wextra -Werror
 
 .c.o		:
 					${CC} ${CF} -c $< -o ${<:.c=.o} -I${INCDIR}
@@ -67,6 +66,8 @@ cclean		:
 psclean		:
 					rm -f ${PUSH_SWAP_OBJS}
 					rm -f ${SHARE_OBJS}
+
+clean		:		cclean psclean
 
 all			:		${CHECKER_NAME} ${PUSH_SWAP_NAME}
 

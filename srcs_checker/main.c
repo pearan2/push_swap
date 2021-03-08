@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: honlee <honlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:39:34 by honlee            #+#    #+#             */
-/*   Updated: 2021/03/04 13:55:59 by honlee           ###   ########.fr       */
+/*   Updated: 2021/03/08 22:12:37 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ t_bool				order_mapper(char *od, t_stack *a, t_stack *b)
 		ft_list_r_all(a, b, FALSE);
 	else
 		return (FALSE);
-	printf_stack(a);
-	printf_stack(b);
 	return (TRUE);
 }
 
