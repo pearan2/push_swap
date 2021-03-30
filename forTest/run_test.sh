@@ -8,13 +8,15 @@ SET=$(seq 0 $1)
 `clang++ main.cpp -o for_test`
 cd ..
 make re
+cp push_swap forTest/
+cp checker forTest/
 cd -
 for i in $SET
 do
 	./for_test $NUMBER > test_number
 	args=`cat test_number`
-	../push_swap $args > solve
-	result=`../checker $args < solve`
+	./push_swap $args > solve
+	result=`./checker $args < solve`
 	if [ "$result" = "OK" ]; then
 		solve_wl=`cat solve | wc -l`
 		echo "test $i passed >> $solve_wl"
@@ -30,6 +32,9 @@ done
 SUM=`expr $SUM / $i`
 
 echo "AVG >> $SUM      MAX >> $MAX"
+rm -rf for_test
+rm -rf checker
+rm -rf push_swap
 cd ..
 make fclean
 cd -
